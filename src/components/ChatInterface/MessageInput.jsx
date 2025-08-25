@@ -181,7 +181,7 @@ const MessageInput = () => {
               }`}></div>
               <span className="text-xs text-gray-500">
                 {useAI && (userApiKey || process.env.REACT_APP_GEMINI_API_KEY) 
-                  ? 'AI Enhanced' 
+                  ? 'Online Mode' 
                   : 'Offline Mode'
                 }
               </span>
