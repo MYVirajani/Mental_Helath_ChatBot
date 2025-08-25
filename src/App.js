@@ -10,45 +10,46 @@ function App() {
 
   return (
     <div className={`App ${darkMode ? 'dark' : ''}`}>
-      <div className={`min-h-screen transition-colors duration-300 ${
+      {/* Full viewport container - CRITICAL: Must be h-screen */}
+      <div className={`h-screen w-full overflow-hidden transition-colors duration-300 ${
         darkMode 
           ? 'bg-gray-900 text-white' 
           : 'bg-gradient-to-br from-blue-50 to-indigo-100 text-gray-800'
       }`}>
-        <div className="flex h-screen">
+        
+        {/* Desktop Sidebar - Completely Fixed */}
+        <div className="hidden lg:block fixed left-0 top-0 w-80 h-screen z-40">
+          <Sidebar />
+        </div>
+
+        {/* Mobile Sidebar Overlay */}
+        {sidebarOpen && (
+          <div className="lg:hidden fixed inset-0 z-50">
+            <div 
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm" 
+              onClick={() => setSidebarOpen(false)} 
+            />
+            <div className="absolute left-0 top-0 w-80 h-full max-w-[80vw]">
+              <Sidebar 
+                isMobile={true}
+                isOpen={sidebarOpen}
+                onClose={() => setSidebarOpen(false)}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Main Content Area - CRITICAL: Must take full height */}
+        <div className="h-screen flex flex-col lg:pl-80">
           
-          {/* Desktop Sidebar - Fixed */}
-          <div className="hidden lg:block w-80 flex-shrink-0">
-            <Sidebar />
+          {/* Mobile Header - Fixed height */}
+          <div className="lg:hidden flex-shrink-0">
+            <MobileHeader onOpenSidebar={() => setSidebarOpen(true)} />
           </div>
 
-          {/* Mobile Sidebar Overlay */}
-          {sidebarOpen && (
-            <div className="lg:hidden fixed inset-0 z-50 flex">
-              <div 
-                className="fixed inset-0 bg-black opacity-50" 
-                onClick={() => setSidebarOpen(false)} 
-              />
-              <div className="relative w-80 max-w-xs">
-                <Sidebar 
-                  isMobile={true}
-                  isOpen={sidebarOpen}
-                  onClose={() => setSidebarOpen(false)}
-                />
-              </div>
-            </div>
-          )}
-
-          {/* Main Content Area - Scrollable */}
-          <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-            
-            {/* Mobile Header */}
-            <MobileHeader onOpenSidebar={() => setSidebarOpen(true)} />
-
-            {/* Chat Interface - Scrollable */}
-            <div className="flex-1 overflow-hidden">
-              <ChatInterface />
-            </div>
+          {/* Chat Interface Container - CRITICAL: Must take remaining height */}
+          <div className="flex-1 min-h-0">
+            <ChatInterface />
           </div>
         </div>
       </div>

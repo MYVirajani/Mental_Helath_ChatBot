@@ -9,21 +9,23 @@ const ChatInterface = () => {
   const isFirstSession = messages.length <= 1;
 
   return (
-    <div className="flex-1 flex flex-col overflow-hidden">
-      {/* Messages Area */}
-      <div className="flex-1 overflow-hidden">
+    <div className="h-full flex flex-col bg-transparent">
+      {/* Messages Area - Takes all available space */}
+      <div className="flex-1 min-h-0">
         <MessageList />
       </div>
 
-      {/* Quick Prompts (shown only at start) */}
+      {/* Quick Prompts (shown only at start) - Fixed at bottom */}
       {isFirstSession && (
-        <div className="px-6 pb-4">
+        <div className="flex-shrink-0 px-6 pb-4">
           <QuickPrompts />
         </div>
       )}
 
-      {/* Message Input */}
-      <MessageInput />
+      {/* Message Input - Fixed at bottom */}
+      <div className="flex-shrink-0">
+        <MessageInput />
+      </div>
     </div>
   );
 };

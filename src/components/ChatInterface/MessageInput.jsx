@@ -104,8 +104,8 @@ const MessageInput = () => {
         {/* Main Input Area */}
         <div className={`flex space-x-3 p-4 rounded-2xl border-2 transition-all duration-200 ${
           darkMode 
-            ? 'bg-gray-900 border-gray-600 focus-within:border-blue-500' 
-            : 'bg-gray-50 border-gray-200 focus-within:border-blue-500 focus-within:bg-white'
+            ? 'bg-gray-900 border-gray-600 ' 
+            : 'bg-gray-50 border-gray-200 focus-within:bg-white'
         } ${isLoading ? 'opacity-75' : ''}`}>
           
           {/* Text Input */}
@@ -115,7 +115,7 @@ const MessageInput = () => {
             onChange={handleInputChange}
             onKeyPress={handleKeyPress}
             placeholder={`Share what's on your mind with your ${currentMode.title.toLowerCase()}...`}
-            className={`flex-1 resize-none outline-none bg-transparent ${
+            className={`flex-1 resize-none outline-none focus:outline-none bg-transparent ${
               darkMode 
                 ? 'text-white placeholder-gray-400' 
                 : 'text-gray-800 placeholder-gray-500'
@@ -127,7 +127,7 @@ const MessageInput = () => {
           {/* Action Buttons */}
           <div className="flex items-end space-x-2">
             {/* Future: Voice input button */}
-            <button
+            {/* <button
               disabled
               className={`p-2 rounded-lg transition-colors opacity-50 cursor-not-allowed ${
                 darkMode 
@@ -137,7 +137,7 @@ const MessageInput = () => {
               title="Voice input (coming soon)"
             >
               <Mic className="w-4 h-4" />
-            </button>
+            </button> */}
 
             {/* Send Button */}
             <button
@@ -189,11 +189,11 @@ const MessageInput = () => {
           </div>
 
           {/* Right side - Keyboard shortcut hint */}
-          <div className={`text-xs ${
+          {/* <div className={`text-xs ${
             darkMode ? 'text-gray-500' : 'text-gray-400'
           }`}>
             Press Enter to send • Shift+Enter for new line
-          </div>
+          </div> */}
         </div>
 
         {/* Disclaimer */}
